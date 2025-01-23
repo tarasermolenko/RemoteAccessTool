@@ -1,3 +1,0 @@
-Notes:
-Powershell wont run automatically because windows is trying to be secure, but we can use command line to run it for us.
-
