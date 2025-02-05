@@ -17,3 +17,9 @@ Remote Access Tool that can be used to control target computers.
 
 
 
+## PayLoads:
+key logger
+
+
+the only thing you have to download is initial.cmd 
+can be put on a ruber ducky or whatever
