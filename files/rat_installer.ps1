@@ -58,7 +58,6 @@ Add-WindowsCapability -Online
 Start-Service sshd
 Set-Service -Name sshd
 -StartupTpe 'Automatic'
-Get-NetFireWallRule -Name *ssh*
 
 # self delete
 cd $initial_dir
