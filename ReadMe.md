@@ -1,6 +1,14 @@
 # Project [IN PROGRESS]
 Taras Ermolenko
 
+#### Dev Road Map
+- remote connection
+- hide user
+    - reconnaissance scan
+        - ip addr for ssh
+        - smtp results
+- attacker console
+
 ## Overview: 
 Remote Access Tool that can be used to control target computers.
 
@@ -24,5 +32,3 @@ This is a registry file that hides our administrative user from the system log i
 
 ### confirm-reg.vbs
 When installing the `hide-user.reg` file, we need to interact with some interactive windows. To bypass this, we use this vbs file to inject keystrokes and bypass the confirmations windows.
-
-

