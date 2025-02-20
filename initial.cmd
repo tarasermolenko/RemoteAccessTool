@@ -22,4 +22,4 @@ powershell ./wget.cmd
 
 @REM cd back into initial location
 cd "%INITIALPATH%"
-@REM del initial.cmd
+del initial.cmd

