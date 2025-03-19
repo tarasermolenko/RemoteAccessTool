@@ -23,4 +23,4 @@ echo [+] Completed
 # clean up
 echo [+] Installation Completed
 echo "- delete this directory and restart your terminal"
-echo "- type 'rat' into your terminal to launch RAT"
+echo "- type 'rat' into your terminal to launch the RAT"

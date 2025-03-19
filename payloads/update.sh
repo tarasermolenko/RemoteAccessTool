@@ -2,7 +2,7 @@
 rm -rf .RAT
 
 # install new version
-git clone https://github.com/tarasermolenko/RAT.git
+git clone https://github.com/tarasermolenko/RemoteAccessTool.git
 
 # install dependencies
 cd RAT
