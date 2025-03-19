@@ -1,2 +1,2 @@
 # Dont normalize line endings
-* text=false
+* -text
