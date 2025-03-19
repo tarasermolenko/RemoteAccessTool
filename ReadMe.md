@@ -10,7 +10,7 @@
 ```
 
 # DISCLAIMER
-Created for Practice and Educational Purpouses Only  
+Created for practice, use ethically
 
 ## Requirements:
 **Attacker PC**
