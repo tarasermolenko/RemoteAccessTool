@@ -10,7 +10,8 @@
 ```
 
 # DISCLAIMER
-Created for practice, please use ethically.
+Created for practice...
+NOT RESPONSIBLE FOR MISUSE. USE AT YOUR OWN RISK. IF YOU DO NOT KNOW WHAT YOU ARE DOING, DON'T DO IT. WE DO NOT ENDORSE ILLEGAL ACTIVITY. THIS IS FOR EDUCATIONAL PURPOSES ONLY.
 
 ## Requirements:
 **Attacker PC**
