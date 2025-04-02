@@ -41,7 +41,7 @@ options_menu = """
 
 username = getpass.getuser()
 header = f"[~] {username}@rat $ "
-remote_path = "raw.githubusercontent.com/user/RAT/main/"
+remote_path = "raw.githubusercontent.com/user/RemoteAccessTool/tree/main/"
 
 # read config file
 def read_config(config_file):

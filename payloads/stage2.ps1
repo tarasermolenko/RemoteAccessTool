@@ -51,6 +51,7 @@ mkdir $temp_folder_path
 Set-Location $temp_folder_path
 
 # enabling persistent ssh
+# to do: check for ssh first?
 Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
 Start-Service sshd
 Set-Service -Name sshd -StartupType 'Automatic'

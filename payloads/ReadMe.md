@@ -24,4 +24,4 @@ When installing the hide-user.reg file, we need to interact with some interactiv
 To bypass this, we use this vbs file to inject keystrokes and bypass the confirmations windows.
 
 ## update.sh
-A file used by our main.py file in order to check for updates and update the OnlyRAT malware.
+A file used by our main.py file in order to check for updates and update the RAT

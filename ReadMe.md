@@ -1,4 +1,4 @@
-# [BETA - IN PROGRESS]
+# [IN PROGRESS]
 
 ```
   ____                      _            _                           _____           _ 
@@ -10,8 +10,7 @@
 ```
 
 # DISCLAIMER
-Created for practice...
-NOT RESPONSIBLE FOR MISUSE. USE AT YOUR OWN RISK. IF YOU DO NOT KNOW WHAT YOU ARE DOING, DON'T DO IT. I DO NOT ENDORSE ILLEGAL ACTIVITY. THIS IS FOR EDUCATIONAL PURPOSES ONLY.
+Created for practice, please use ethically.
 
 ## Requirements:
 **Attacker PC**
