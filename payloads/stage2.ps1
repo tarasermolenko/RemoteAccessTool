@@ -67,15 +67,22 @@ $MailMessage.To.Add($EmailTo)
 $MailMessage.Subject = $Subject
 $MailMessage.Body = $Body
 
-# Send the email
+# Define file path for saving results (Desktop folder)
+$DesktopPath = [Environment]::GetFolderPath("Desktop")
+$LogFilePath = Join-Path -Path $DesktopPath -ChildPath "EmailLog.txt"
+
+# Send the email and log results
 try {
     $SMTPClient.Send($MailMessage)
-    Write-Host "Email sent successfully."
+    $Result = "[$(Get-Date)] Email sent successfully.`nSubject: $Subject`nBody: $Body"
+    Write-Host $Result
 } catch {
-    Write-Error "Failed to send email: $_"
+    $Result = "[$(Get-Date)] Failed to send email.`nError: $_`nSubject: $Subject`nBody: $Body"
+    Write-Error $Result
 }
 
-Pause
+# Write result to file
+$Result | Out-File -FilePath $LogFilePath -Append -Encoding UTF8
 ##################
 
 
