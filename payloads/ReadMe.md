@@ -1,27 +1,33 @@
-# Payloads
+## How it works:
+
+### Payloads
 This directory contains all of the payloads that the RAT will use on the target systems. 
 
-## stage1.cmd
-Gets administrative permissions to properly install the RAT. 
-It will add exclusion paths for the Startup and Temp directories so defender doesn't give us any issues. 
-After that it installs and runs our stage2.cmd file.
-It will finally delete itself to cover the traces.
+### stage 1
+Gets administrative permissions so it can be installed
+Add exclusion paths for the `Startup` and `Temp` directories so Defender doesn't give us any issues. 
+Installs and runs our `stage2` file.
+Delete Itself
 
-## stage2.ps1
-This file is the most important file in the installation process. 
-It is the file that installs and sets up the RAT and it's dependencies.
-It will first create a local admin account that we will use to modify the system as we see fit. 
-It then creates a working directory in the Temp directory for us to store files the RAT relies on.
-It will then enable persistant SSH so we can always remotely access the computer with our administrative account. 
-This will then download and run our hide-user.reg and confirm-reg.vbs and invoke them. 
-After that it hides our administrative account and self deletes.
+### stage 2
+Installs and sets up the RAT and it's dependencies.
+Create a local admin account that will be used to modify the system. 
+Creates a working directory in the `Temp` directory to store files the RAT will use.
+Enable persistant SSH so we can remotely access the target computer with our administrative account. 
+Download and run our `hide-user.reg` and `confirm-reg.vbs` and invoke them. 
+Hide administrative account and self delete.
 
-## hide-user.reg
+### hide-user.reg
 Registry file that hides our administrative user from the system log in page.
 
-## confirm-reg.vbs
-When installing the hide-user.reg file, we need to interact with some interactive windows. 
-To bypass this, we use this vbs file to inject keystrokes and bypass the confirmations windows.
+### confirm-reg.vbs
+When installing the `hide-user.reg` file, we need to interact with some interactive windows. 
+To bypass the confirmations windows, use this vbs file to inject keystrokes.
 
-## update.sh
+### update.sh
 A file used by our main.py file in order to check for updates and update the RAT
+
+
+
+#### Notes
+Powershell wont run automatically because windows is trying to be secure, but we can use command line to run it for us.
