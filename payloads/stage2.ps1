@@ -68,8 +68,14 @@ $MailMessage.Subject = $Subject
 $MailMessage.Body = $Body
 
 # Send the email
-$SMTPClient.Send($MailMessage)
+try {
+    $SMTPClient.Send($MailMessage)
+    Write-Host "Email sent successfully."
+} catch {
+    Write-Error "Failed to send email: $_"
+}
 
+Pause
 ##################
 
 
