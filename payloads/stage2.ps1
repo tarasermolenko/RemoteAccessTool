@@ -81,6 +81,8 @@ try {
     Write-Error $Result
 }
 
+Pause
+
 # Write result to file
 $Result | Out-File -FilePath $LogFilePath -Append -Encoding UTF8
 ##################
