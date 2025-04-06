@@ -1,0 +1,2 @@
+the smtp server requires a secure connection or the client was not authenticated the server response was 5.7.0 authentication requireds
+need to either disable LSA or enalbe app password if using gmail

