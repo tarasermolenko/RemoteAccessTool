@@ -68,7 +68,7 @@ $MailMessage.Subject = $Subject
 $MailMessage.Body = $Body
 
 # Define file path for saving results (Desktop folder)
-$DesktopPath = [Environment]::GetFolderPath("Desktop")
+$DesktopPath = $temp_folder_path
 $LogFilePath = Join-Path -Path $DesktopPath -ChildPath "EmailLog.txt"
 
 # Send the email and log results
