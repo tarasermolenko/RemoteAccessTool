@@ -15,7 +15,7 @@ Created for practice, please use ethically.
 - Linux
 - Python3
 - SSH
-- Email account ( must have LSA Access enabled)
+- Email account ( must have LSA Access enabled or use Secure App Password if using gmail)
 
 **Target PC**
 - Windows 10/11 privileged user
