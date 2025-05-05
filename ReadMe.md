@@ -22,7 +22,7 @@ Created for practice, please use ethically.
 
 ## Instructions:
 **Target Installation**
-- The installers folder contains the script that needs to be ran on our target
+- The installers folder contains the script that needs to be ran on the target
 
 **Attacker Installation**
 - install dependencies for RAT
@@ -30,15 +30,11 @@ Created for practice, please use ethically.
 chmod +x install.sh
 ./install.sh
 ```
-
 **Attacker Console**
 - Run `rat` in your terminal for help
 ```bash
 rat
 ```
-- Append configuraiton file to specify target
-```bash
-rat user.rat
-```
+
 
 
