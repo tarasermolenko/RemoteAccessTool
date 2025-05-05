@@ -35,6 +35,7 @@ chmod +x install.sh
 ```bash
 rat
 ```
+![Project Screenshot](https://github.com/tarasermolenko/RemoteAccessTool/blob/main/rat%20tool.png)
 
 
 
