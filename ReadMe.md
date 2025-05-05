@@ -26,7 +26,7 @@ Created for practice, please use ethically.
 - The credentials are sent over email
 
 **Attacker Installation**
-- install dependencies for RAT
+- Install dependencies for RAT
 ```bash
 chmod +x install.sh
 ./install.sh
