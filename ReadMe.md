@@ -23,6 +23,7 @@ Created for practice, please use ethically.
 ## Instructions:
 **Target Installation**
 - The installers folder contains the script that needs to be ran on the target
+- The credentials are sent over email
 
 **Attacker Installation**
 - install dependencies for RAT
